@@ -1,4 +1,5 @@
-import javax.swing.*;
+package model;
+
 
 /**
  * Created by Joachim De Schryver & Joran De Boever
@@ -18,6 +19,10 @@ public class NeuraalNetwerk {
     private double[] outputBiasWaarden = new double[2];
 
     private double[] targets = new double[2];
+
+    public NeuraalNetwerk() {
+        init();
+    }
 
     public void init() {
         inputWaarden[0] = 1.0;
@@ -49,17 +54,17 @@ public class NeuraalNetwerk {
         hiddenBiasWaarden[2] = 0.015;
         hiddenBiasWaarden[3] = 0.016;
 
-        eersteAxonen[0][0] = 0.017;
-        eersteAxonen[0][1] = 0.018;
+        tweedeAxonen[0][0] = 0.017;
+        tweedeAxonen[0][1] = 0.018;
 
-        eersteAxonen[1][0] = 0.019;
-        eersteAxonen[1][1] = 0.020;
+        tweedeAxonen[1][0] = 0.019;
+        tweedeAxonen[1][1] = 0.020;
 
-        eersteAxonen[2][0] = 0.021;
-        eersteAxonen[2][1] = 0.022;
+        tweedeAxonen[2][0] = 0.021;
+        tweedeAxonen[2][1] = 0.022;
 
-        eersteAxonen[3][0] = 0.023;
-        eersteAxonen[3][1] = 0.024;
+        tweedeAxonen[3][0] = 0.023;
+        tweedeAxonen[3][1] = 0.024;
 
         outputWaarden[0] = 0.5070;
         outputWaarden[1] = 0.5073;
@@ -102,8 +107,4 @@ public class NeuraalNetwerk {
         return targets;
     }
 
-    public static void main(String[] args) {
-        System.out.println("hello");
-        JFrame frame = new JFrame();
-    }
 }
