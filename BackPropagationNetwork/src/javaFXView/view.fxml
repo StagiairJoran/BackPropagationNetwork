@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="javaFXView.ViewController">
+    <children>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@stylesheet.css"
+                    VBox.vgrow="ALWAYS">
+            <children>
+                <Button fx:id="btnInitialise" layoutX="155.0" layoutY="33.0" mnemonicParsing="false" text="Initialise"/>
+                <Button fx:id="btnStart" layoutX="378.0" layoutY="33.0" mnemonicParsing="false"
+                        text="Start Backpropagation"/>
+
+                <Label fx:id="lblInput1" layoutX="115.0" layoutY="90.0" styleClass="neuron" text="Input 1"/>
+                <Label fx:id="lblInput2" layoutX="259.0" layoutY="90.0" styleClass="neuron" text="Input 2"/>
+                <Label fx:id="lblInput3" layoutX="443.0" layoutY="90.0" styleClass="neuron" text="Input 3"/>
+
+                <Label fx:id="ihWeight11" styleClass="axon" layoutX="14.0" layoutY="163.0" text="IH11"/>
+                <Label fx:id="ihWeight13" styleClass="axon" layoutX="118.0" layoutY="163.0" text="IH13"/>
+                <Label fx:id="ihWeight14" styleClass="axon" layoutX="176.0" layoutY="163.0" text="IH14"/>
+                <Label fx:id="ihWeight12" styleClass="axon" layoutX="70.0" layoutY="163.0" text="IH12"/>
+                <Label fx:id="ihWeight22" styleClass="axon" layoutX="263.0" layoutY="163.0" text="IH22"/>
+                <Label fx:id="ihWeight24" styleClass="axon" layoutX="363.0" layoutY="163.0" text="IH24"/>
+                <Label fx:id="ihWeight23" styleClass="axon" layoutX="320.0" layoutY="163.0" text="IH23"/>
+                <Label fx:id="ihWeight21" styleClass="axon" layoutX="224.0" layoutY="163.0" text="IH21"/>
+                <Label fx:id="ihWeight32" styleClass="axon" layoutX="483.0" layoutY="164.0" text="IH32"/>
+                <Label fx:id="ihWeight34" styleClass="axon" layoutX="596.0" layoutY="165.0" text="IH34"/>
+                <Label fx:id="ihWeight33" styleClass="axon" layoutX="546.0" layoutY="165.0" text="IH33"/>
+                <Label fx:id="ihWeight31" styleClass="axon" layoutX="426.0" layoutY="164.0" text="IH31"/>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
