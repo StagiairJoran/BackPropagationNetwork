@@ -1,11 +1,14 @@
 package model;
 
 
+import java.util.Observable;
+import java.util.Random;
+
 /**
  * Created by Joachim De Schryver & Joran De Boever
  * on 17/11/15.
  */
-public class NeuraalNetwerk {
+public class NeuraalNetwerk extends Observable {
 
     private double[] inputWaarden = new double[3];
 
@@ -21,6 +24,9 @@ public class NeuraalNetwerk {
 
     private double[] targets = new double[2];
 
+    private double[] outputErrors = new double[2];
+    private double[] hiddenErrors = new double[4];
+
     //algoritme implementatie parameters
     private int epoch = 0;
 
@@ -35,7 +41,7 @@ public class NeuraalNetwerk {
     private double learningRate = 0.5;
 
     public NeuraalNetwerk() {
-        init();
+
     }
 
     public void init() {
@@ -86,7 +92,17 @@ public class NeuraalNetwerk {
         outputBiasWaarden[0] = 0.025;
         outputBiasWaarden[0] = 0.026;
 
+        Random r = new Random();
+        targets[0] = r.nextDouble();
+        targets[1] = r.nextDouble();
 
+        outputErrors[0] = 0.00;
+        outputErrors[1] = 0.00;
+
+        hiddenErrors[0] = 0.00;
+        hiddenErrors[1] = 0.00;
+        hiddenErrors[2] = 0.00;
+        hiddenErrors[3] = 0.00;
     }
 
     public double[] getInputWaarden() {
@@ -120,5 +136,77 @@ public class NeuraalNetwerk {
     public double[] getTargets() {
         return targets;
     }
+
+    public double[] getOutputErrors() {
+        return outputErrors;
+    }
+
+    public double[] getHiddenErrors() {
+        return hiddenErrors;
+    }
+
+    public double sigmoidFunction(double value) {
+        return (1 / (1 + Math.pow(Math.E, (-1 * value))));
+    }
+
+    public void startBackPropagation() {
+
+        calculateNeurons();
+        calculateErrorsAndChangeWeights();
+
+        setChanged();
+        notifyObservers();
+
+            /*
+            for(int i = 0; i<10;i++) {
+            eersteAxonen[0][0] = i;
+            eersteAxonen[0][1] = i+1;
+            eersteAxonen[0][2] = i+3;
+            eersteAxonen[0][3] = i+5;
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            */
+    }
+
+    private void calculateNeurons() {
+        //calculating hidden neurons
+        for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
+            Double neuronTemp = 0.00;
+            for (int inputTeller = 0; inputTeller < inputWaarden.length; inputTeller++) {
+                neuronTemp += inputWaarden[inputTeller] * eersteAxonen[inputTeller][hiddenTeller];
+            }
+            hiddenWaarden[hiddenTeller] = sigmoidFunction(neuronTemp);
+        }
+
+        //calculating output neurons
+        for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
+            Double neuronTemp = 0.00;
+            for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
+                neuronTemp += hiddenWaarden[hiddenTeller] * tweedeAxonen[hiddenTeller][outputTeller];
+            }
+            outputWaarden[outputTeller] = sigmoidFunction(neuronTemp);
+        }
+    }
+
+    private void calculateErrorsAndChangeWeights(){
+        //calculating outputError
+        for(int i = 0;i<outputErrors.length;i++){
+            outputErrors[i] = outputWaarden[i]*(1-outputWaarden[i])*(targets[i]-outputWaarden[i]);
+        }
+
+        //changeWeights
+
+
+        //calculating hiddenErrors
+        for(int i = 0; i<hiddenErrors.length;i++){
+            hiddenErrors[i] = outputWaarden[i]*(1-outputWaarden[i])*(outputErrors[0]*-outputWaarden[i]);
+        }
+    }
+
 
 }

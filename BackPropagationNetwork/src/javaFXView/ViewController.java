@@ -8,17 +8,26 @@ import javafx.scene.control.*;
 import model.NeuraalNetwerk;
 
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 /**
  * Created by Joachim De Schryver & Joran De Boever
  * on 18/11/15.
  */
-public class ViewController implements Initializable {
-    private NeuraalNetwerk neuraalNetwerk = new NeuraalNetwerk();
+public class ViewController implements Initializable, Observer {
+
+    private NeuraalNetwerk neuraalNetwerk;
+
+    public ViewController() {
+        neuraalNetwerk = new NeuraalNetwerk();
+        neuraalNetwerk.addObserver(this);
+    }
 
     @FXML
     private Button btnInitialise;
+
     @FXML
     private Button btnStart;
 
@@ -43,12 +52,28 @@ public class ViewController implements Initializable {
     @FXML
     private Label lblOutput1, lblOutput2;
 
+    @FXML
+    private Label errorValueOutput1, errorValueOutput2, errorHidden1, errorHidden2;
+
+    @FXML
+    private Label target1, target2;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnInitialise.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                neuraalNetwerk.init();
                 vulWaardenin();
+            }
+        });
+
+        btnStart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //BackGroundWorker worker = new BackGroundWorker(neuraalNetwerk);
+
+                neuraalNetwerk.startBackPropagation();
             }
         });
 
@@ -91,8 +116,22 @@ public class ViewController implements Initializable {
         lblOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[0]));
         lblOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[1]));
 
+        if (neuraalNetwerk.getOutputErrors() != null){
+            errorValueOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[0]));
+            errorValueOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[1]));
+        }
 
+        if (neuraalNetwerk.getOutputErrors() != null){
+            errorHidden1.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[0]));
+            errorHidden2.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[1]));
+        }
 
+        target1.setText(String.format("%.5f", neuraalNetwerk.getTargets()[0]));
+        target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));
+    }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        vulWaardenin();
     }
 }
