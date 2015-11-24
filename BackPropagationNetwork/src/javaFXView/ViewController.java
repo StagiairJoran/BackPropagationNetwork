@@ -71,7 +71,6 @@ public class ViewController implements Initializable, Observer {
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //BackGroundWorker worker = new BackGroundWorker(neuraalNetwerk);
 
                 neuraalNetwerk.startBackPropagation();
             }
@@ -128,6 +127,7 @@ public class ViewController implements Initializable, Observer {
 
         target1.setText(String.format("%.5f", neuraalNetwerk.getTargets()[0]));
         target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));
+
     }
 
     @Override

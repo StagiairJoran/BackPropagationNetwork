@@ -30,7 +30,7 @@ public class NeuraalNetwerk extends Observable {
     //algoritme implementatie parameters
     private int epoch = 0;
 
-    private int maxEpoch = 10000;
+    private int maxEpoch = 1000;
 
     private double error;
 
@@ -103,6 +103,9 @@ public class NeuraalNetwerk extends Observable {
         hiddenErrors[1] = 0.00;
         hiddenErrors[2] = 0.00;
         hiddenErrors[3] = 0.00;
+
+
+
     }
 
     public double[] getInputWaarden() {
@@ -150,27 +153,19 @@ public class NeuraalNetwerk extends Observable {
     }
 
     public void startBackPropagation() {
+        epoch = 0;
+        error = 1;
 
-        calculateNeurons();
-        calculateErrorsAndChangeWeights();
+        while (epoch < maxEpoch || error > errorThreshold) {
+            calculateNeurons();
+            calculateErrorsAndChangeWeights();
+            error = (targets[0] - outputWaarden[0]) + (targets[1] - outputWaarden[1]);
 
-        setChanged();
-        notifyObservers();
+            setChanged();
+            notifyObservers();
+            epoch++;
+        }
 
-            /*
-            for(int i = 0; i<10;i++) {
-            eersteAxonen[0][0] = i;
-            eersteAxonen[0][1] = i+1;
-            eersteAxonen[0][2] = i+3;
-            eersteAxonen[0][3] = i+5;
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            */
     }
 
     private void calculateNeurons() {
@@ -193,18 +188,30 @@ public class NeuraalNetwerk extends Observable {
         }
     }
 
-    private void calculateErrorsAndChangeWeights(){
+    private void calculateErrorsAndChangeWeights() {
         //calculating outputError
-        for(int i = 0;i<outputErrors.length;i++){
-            outputErrors[i] = outputWaarden[i]*(1-outputWaarden[i])*(targets[i]-outputWaarden[i]);
+        for (int i = 0; i < outputErrors.length; i++) {
+            outputErrors[i] = outputWaarden[i] * (1 - outputWaarden[i]) * (targets[i] - outputWaarden[i]);
         }
 
         //changeWeights
+        for (int hiddenTeller = 0; hiddenTeller < tweedeAxonen.length; hiddenTeller++) {
+            for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
+                tweedeAxonen[hiddenTeller][outputTeller] = tweedeAxonen[hiddenTeller][outputTeller] + learningRate * outputErrors[outputTeller] * hiddenWaarden[hiddenTeller];
+            }
 
+        }
 
         //calculating hiddenErrors
-        for(int i = 0; i<hiddenErrors.length;i++){
-            hiddenErrors[i] = outputWaarden[i]*(1-outputWaarden[i])*(outputErrors[0]*-outputWaarden[i]);
+        for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
+            hiddenErrors[hiddenTeller] = hiddenWaarden[hiddenTeller] * (1 - hiddenWaarden[hiddenTeller]) * ((outputErrors[0] * tweedeAxonen[hiddenTeller][0]) + (outputErrors[1] * tweedeAxonen[hiddenTeller][1]));
+        }
+
+        //change hidden layer weights
+        for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
+            for (int inputTeller = 0; inputTeller < inputWaarden.length; inputTeller++) {
+                eersteAxonen[inputTeller][hiddenTeller] =  eersteAxonen[inputTeller][hiddenTeller] + learningRate * hiddenErrors[hiddenTeller] * inputWaarden[inputTeller];
+            }
         }
     }
 
