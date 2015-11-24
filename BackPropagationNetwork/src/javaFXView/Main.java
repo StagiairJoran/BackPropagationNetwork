@@ -19,6 +19,7 @@ public class Main extends Application {
         primaryStage.setTitle("Backpropagation");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
+
     }
 
 

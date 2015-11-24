@@ -1,6 +1,8 @@
 package model;
 
 
+import javafx.concurrent.Task;
+
 import java.util.Observable;
 import java.util.Random;
 
@@ -160,12 +162,30 @@ public class NeuraalNetwerk extends Observable {
             calculateNeurons();
             calculateErrorsAndChangeWeights();
             error = (targets[0] - outputWaarden[0]) + (targets[1] - outputWaarden[1]);
-
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             setChanged();
             notifyObservers();
             epoch++;
         }
 
+    }
+
+    public Task getTask(){
+        Task task = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                updateProgress(1, 100);
+                startBackPropagation();
+                return null;
+            }
+
+
+        };
+        return task;
     }
 
     private void calculateNeurons() {

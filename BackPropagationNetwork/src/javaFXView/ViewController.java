@@ -1,5 +1,7 @@
 package javaFXView;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import java.util.ResourceBundle;
  * on 18/11/15.
  */
 public class ViewController implements Initializable, Observer {
+
 
     private NeuraalNetwerk neuraalNetwerk;
 
@@ -65,6 +68,7 @@ public class ViewController implements Initializable, Observer {
             public void handle(ActionEvent event) {
                 neuraalNetwerk.init();
                 vulWaardenin();
+
             }
         });
 
@@ -72,7 +76,9 @@ public class ViewController implements Initializable, Observer {
             @Override
             public void handle(ActionEvent event) {
 
-                neuraalNetwerk.startBackPropagation();
+                Thread th = new Thread(neuraalNetwerk.getTask());
+                th.setDaemon(true);
+                th.start();
             }
         });
 
@@ -115,12 +121,12 @@ public class ViewController implements Initializable, Observer {
         lblOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[0]));
         lblOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[1]));
 
-        if (neuraalNetwerk.getOutputErrors() != null){
+        if (neuraalNetwerk.getOutputErrors() != null) {
             errorValueOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[0]));
             errorValueOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[1]));
         }
 
-        if (neuraalNetwerk.getOutputErrors() != null){
+        if (neuraalNetwerk.getOutputErrors() != null) {
             errorHidden1.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[0]));
             errorHidden2.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[1]));
         }
@@ -132,6 +138,13 @@ public class ViewController implements Initializable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        vulWaardenin();
+       Platform.runLater(new Runnable() {
+           @Override
+           public void run() {
+               vulWaardenin();
+           }
+       });
     }
+
+
 }
