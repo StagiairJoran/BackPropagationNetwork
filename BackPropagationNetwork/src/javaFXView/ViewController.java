@@ -40,6 +40,9 @@ public class ViewController implements Initializable {
     @FXML
     private Label hoWeight11, hoWeight12, hoWeight21, hoWeight22, hoWeight31, hoWeight32, hoWeight41, hoWeight42;
 
+    @FXML
+    private Label lblOutput1, lblOutput2;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnInitialise.setOnAction(new EventHandler<ActionEvent>() {
@@ -84,6 +87,10 @@ public class ViewController implements Initializable {
         hoWeight32.setText(String.format("%.3f", neuraalNetwerk.getTweedeAxonen()[2][1]));
         hoWeight41.setText(String.format("%.3f", neuraalNetwerk.getTweedeAxonen()[3][0]));
         hoWeight42.setText(String.format("%.3f", neuraalNetwerk.getTweedeAxonen()[3][1]));
+
+        lblOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[0]));
+        lblOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[1]));
+
 
 
 

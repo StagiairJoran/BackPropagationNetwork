@@ -6,6 +6,7 @@ package model;
  * on 17/11/15.
  */
 public class NeuraalNetwerk {
+
     private double[] inputWaarden = new double[3];
 
     private double[][] eersteAxonen = new double[3][4]; // input-to-hidden
@@ -19,6 +20,19 @@ public class NeuraalNetwerk {
     private double[] outputBiasWaarden = new double[2];
 
     private double[] targets = new double[2];
+
+    //algoritme implementatie parameters
+    private int epoch = 0;
+
+    private int maxEpoch = 10000;
+
+    private double error;
+
+    private double errorThreshold = 0.0001;
+
+    private double momentum;
+
+    private double learningRate = 0.5;
 
     public NeuraalNetwerk() {
         init();
