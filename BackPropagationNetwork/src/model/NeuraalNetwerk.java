@@ -34,13 +34,16 @@ public class NeuraalNetwerk extends Observable {
 
     private int maxEpoch = 1000;
 
-    private double error;
+    private double error = 0;
 
     private double errorThreshold = 0.0001;
 
     private double momentum;
 
     private double learningRate = 0.5;
+
+
+    private double progress = 0;
 
     public NeuraalNetwerk() {
 
@@ -150,6 +153,18 @@ public class NeuraalNetwerk extends Observable {
         return hiddenErrors;
     }
 
+    public double getProgress() {
+        return progress;
+    }
+
+    public double getError() {
+        return error;
+    }
+
+    public double getErrorThreshold() {
+        return errorThreshold;
+    }
+
     public double sigmoidFunction(double value) {
         return (1 / (1 + Math.pow(Math.E, (-1 * value))));
     }
@@ -157,19 +172,21 @@ public class NeuraalNetwerk extends Observable {
     public void startBackPropagation() {
         epoch = 0;
         error = 1;
-
-        while (epoch < maxEpoch || error > errorThreshold) {
+        while (epoch < maxEpoch && error > errorThreshold) {
             calculateNeurons();
             calculateErrorsAndChangeWeights();
             error = (targets[0] - outputWaarden[0]) + (targets[1] - outputWaarden[1]);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+
             setChanged();
             notifyObservers();
             epoch++;
+            progress = ((double) epoch) / maxEpoch;
         }
 
     }
@@ -178,11 +195,10 @@ public class NeuraalNetwerk extends Observable {
         Task task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
-                updateProgress(1, 100);
+               // updateProgress(1, 100);
                 startBackPropagation();
                 return null;
             }
-
 
         };
         return task;

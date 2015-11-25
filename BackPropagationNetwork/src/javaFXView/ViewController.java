@@ -56,10 +56,16 @@ public class ViewController implements Initializable, Observer {
     private Label lblOutput1, lblOutput2;
 
     @FXML
-    private Label errorValueOutput1, errorValueOutput2, errorHidden1, errorHidden2;
+    private Label lblError, errorValueOutput1, errorValueOutput2, errorHidden1, errorHidden2;
 
     @FXML
     private Label target1, target2;
+
+    @FXML
+    private ProgressBar progressbar;
+
+    @FXML
+    private TextField txtLearningRate, txtErrorThreshold;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,8 +81,16 @@ public class ViewController implements Initializable, Observer {
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+               Task task = new Task<Void>() {
+                    @Override
+                    public Void call() throws Exception {
+                        // updateProgress(1, 100);
+                        neuraalNetwerk.startBackPropagation();
+                        return null;
+                    }
 
-                Thread th = new Thread(neuraalNetwerk.getTask());
+                };
+                Thread th = new Thread(task);
                 th.setDaemon(true);
                 th.start();
             }
@@ -134,6 +148,10 @@ public class ViewController implements Initializable, Observer {
         target1.setText(String.format("%.5f", neuraalNetwerk.getTargets()[0]));
         target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));
 
+        txtErrorThreshold.setText(String.format("%.5f", neuraalNetwerk.getErrorThreshold()));
+
+        lblError.setText(String.format("%.5f", neuraalNetwerk.getError()));
+        progressbar.setProgress(neuraalNetwerk.getProgress());
     }
 
     @Override
