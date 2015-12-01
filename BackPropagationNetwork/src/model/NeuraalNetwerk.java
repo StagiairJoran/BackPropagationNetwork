@@ -16,6 +16,7 @@ public class NeuraalNetwerk extends Observable {
 
     private double[][] eersteAxonen = new double[3][4]; // input-to-hidden
 
+    private double[] tempHiddens = new double[4];
     private double[] hiddenWaarden = new double[4];
     private double[] hiddenBiasWaarden = new double[4];
 
@@ -110,7 +111,6 @@ public class NeuraalNetwerk extends Observable {
         hiddenErrors[3] = 0.00;
 
 
-
     }
 
     public double[] getInputWaarden() {
@@ -165,15 +165,33 @@ public class NeuraalNetwerk extends Observable {
         return errorThreshold;
     }
 
-    public double sigmoidFunction(double value) {
-        return (1 / (1 + Math.pow(Math.E, (-1 * value))));
+    public static double SigmoidFunction(double x) {
+        if (x < -45.0)
+            return 0.0;
+        if (x > 45.0)
+            return 1.0;
+        return 1.0 / (1.0 + Math.exp(-x));
     }
+
+
+    /* public double sigmoidFunction(double value) {
+         return (1 / (1 + Math.pow(Math.E, (-1 * value))));
+     }
+ */
+    public static double HyperTanFunction(double x) {
+        if (x < -45.0)
+            return -1.0;
+        if (x > 45.0)
+            return 1.0;
+        return Math.tanh(x);
+    }
+
 
     public void startBackPropagation() {
         epoch = 0;
         error = 1;
         while (epoch < maxEpoch && error > errorThreshold) {
-            calculateNeurons();
+            outputWaarden = computeOutputs();
             calculateErrorsAndChangeWeights();
             error = (targets[0] - outputWaarden[0]) + (targets[1] - outputWaarden[1]);
             error = Math.abs(error);
@@ -192,11 +210,11 @@ public class NeuraalNetwerk extends Observable {
 
     }
 
-    public Task getTask(){
+    public Task getTask() {
         Task task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
-               // updateProgress(1, 100);
+                // updateProgress(1, 100);
                 startBackPropagation();
                 return null;
             }
@@ -205,24 +223,27 @@ public class NeuraalNetwerk extends Observable {
         return task;
     }
 
-    private void calculateNeurons() {
+    private double[] computeOutputs() {
         //calculating hidden neurons
         for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
-            Double neuronTemp = 0.00;
+            hiddenWaarden[hiddenTeller] = hiddenBiasWaarden[hiddenTeller];
             for (int inputTeller = 0; inputTeller < inputWaarden.length; inputTeller++) {
-                neuronTemp += inputWaarden[inputTeller] * eersteAxonen[inputTeller][hiddenTeller];
+                hiddenWaarden[hiddenTeller] += inputWaarden[inputTeller] * eersteAxonen[inputTeller][hiddenTeller];
             }
-            hiddenWaarden[hiddenTeller] = sigmoidFunction(neuronTemp);
+            tempHiddens[hiddenTeller] = HyperTanFunction(hiddenWaarden[hiddenTeller]);
+
         }
 
         //calculating output neurons
+        double[] tempOutputWaarden = new double[2];
         for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
-            Double neuronTemp = 0.00;
-            for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
-                neuronTemp += hiddenWaarden[hiddenTeller] * tweedeAxonen[hiddenTeller][outputTeller];
+            Double neuronTemp = outputBiasWaarden[outputTeller];
+            for (int hiddenTeller = 0; hiddenTeller < tempHiddens.length; hiddenTeller++) {
+                neuronTemp += tempHiddens[hiddenTeller] * tweedeAxonen[hiddenTeller][outputTeller];
             }
-            outputWaarden[outputTeller] = sigmoidFunction(neuronTemp);
+            tempOutputWaarden[outputTeller] = SigmoidFunction(neuronTemp);
         }
+        return tempOutputWaarden;
     }
 
     private void calculateErrorsAndChangeWeights() {
@@ -234,20 +255,20 @@ public class NeuraalNetwerk extends Observable {
         //changeWeights
         for (int hiddenTeller = 0; hiddenTeller < tweedeAxonen.length; hiddenTeller++) {
             for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
-                tweedeAxonen[hiddenTeller][outputTeller] = tweedeAxonen[hiddenTeller][outputTeller] + learningRate * outputErrors[outputTeller] * hiddenWaarden[hiddenTeller];
+                tweedeAxonen[hiddenTeller][outputTeller] = tweedeAxonen[hiddenTeller][outputTeller] + learningRate * outputErrors[outputTeller] * tempHiddens[hiddenTeller];
             }
 
         }
 
         //calculating hiddenErrors
-        for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
-            hiddenErrors[hiddenTeller] = hiddenWaarden[hiddenTeller] * (1 - hiddenWaarden[hiddenTeller]) * ((outputErrors[0] * tweedeAxonen[hiddenTeller][0]) + (outputErrors[1] * tweedeAxonen[hiddenTeller][1]));
+        for (int hiddenTeller = 0; hiddenTeller < tempHiddens.length; hiddenTeller++) {
+            hiddenErrors[hiddenTeller] = tempHiddens[hiddenTeller] * (1 - tempHiddens[hiddenTeller]) * ((outputErrors[0] * tweedeAxonen[hiddenTeller][0]) + (outputErrors[1] * tweedeAxonen[hiddenTeller][1]));
         }
 
         //change hidden layer weights
-        for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
+        for (int hiddenTeller = 0; hiddenTeller < tempHiddens.length; hiddenTeller++) {
             for (int inputTeller = 0; inputTeller < inputWaarden.length; inputTeller++) {
-                eersteAxonen[inputTeller][hiddenTeller] =  eersteAxonen[inputTeller][hiddenTeller] + learningRate * hiddenErrors[hiddenTeller] * inputWaarden[inputTeller];
+                eersteAxonen[inputTeller][hiddenTeller] = eersteAxonen[inputTeller][hiddenTeller] + learningRate * hiddenErrors[hiddenTeller] * inputWaarden[inputTeller];
             }
         }
     }
