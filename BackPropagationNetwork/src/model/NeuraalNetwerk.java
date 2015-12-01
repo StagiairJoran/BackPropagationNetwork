@@ -44,7 +44,8 @@ public class NeuraalNetwerk extends Observable {
     private double learningRate = 0.5;
 
 
-    private double progress = 0;
+    private double progressTeller = 0;
+    private double progressError = 0;
 
     public NeuraalNetwerk() {
 
@@ -153,8 +154,12 @@ public class NeuraalNetwerk extends Observable {
         return hiddenErrors;
     }
 
-    public double getProgress() {
-        return progress;
+    public double getProgressTeller() {
+        return progressTeller;
+    }
+
+    public double getProgressError() {
+        return progressError;
     }
 
     public double getError() {
@@ -205,7 +210,8 @@ public class NeuraalNetwerk extends Observable {
             setChanged();
             notifyObservers();
             epoch++;
-            progress = ((double) epoch) / maxEpoch;
+            progressTeller = ((double) epoch) / maxEpoch;
+            progressError = 1 - (error - 0.0001);
         }
 
     }

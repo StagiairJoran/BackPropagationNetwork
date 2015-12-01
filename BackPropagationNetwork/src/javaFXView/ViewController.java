@@ -6,7 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import model.NeuraalNetwerk;
 
 import java.net.URL;
@@ -20,12 +23,14 @@ import java.util.ResourceBundle;
  */
 public class ViewController implements Initializable, Observer {
 
+    private boolean initialized = false;
 
     private NeuraalNetwerk neuraalNetwerk;
 
     public ViewController() {
         neuraalNetwerk = new NeuraalNetwerk();
         neuraalNetwerk.addObserver(this);
+
     }
 
     @FXML
@@ -62,7 +67,7 @@ public class ViewController implements Initializable, Observer {
     private Label target1, target2;
 
     @FXML
-    private ProgressBar progressbar;
+    private ProgressBar prgTeller, prgError;
 
     @FXML
     private TextField txtLearningRate, txtErrorThreshold;
@@ -74,27 +79,30 @@ public class ViewController implements Initializable, Observer {
             public void handle(ActionEvent event) {
                 neuraalNetwerk.init();
                 vulWaardenin();
-
-            }
-        });
-
-        btnStart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-               Task task = new Task<Void>() {
+                initialized = true;
+                btnStart.setDisable(false);
+                btnStart.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
-                    public Void call() throws Exception {
-                        // updateProgress(1, 100);
-                        neuraalNetwerk.startBackPropagation();
-                        return null;
-                    }
+                    public void handle(ActionEvent event) {
+        
+                        Task task = new Task<Void>() {
+                            @Override
+                            public Void call() throws Exception {
+                                // updateProgress(1, 100);
+                                neuraalNetwerk.startBackPropagation();
+                                return null;
+                            }
 
-                };
-                Thread th = new Thread(task);
-                th.setDaemon(true);
-                th.start();
+                        };
+                        Thread th = new Thread(task);
+                        th.setDaemon(true);
+                        th.start();
+                    }
+                });
             }
         });
+
+
 
     }
 
@@ -151,17 +159,18 @@ public class ViewController implements Initializable, Observer {
         txtErrorThreshold.setText(String.format("%.5f", neuraalNetwerk.getErrorThreshold()));
 
         lblError.setText(String.format("%.5f", neuraalNetwerk.getError()));
-        progressbar.setProgress(neuraalNetwerk.getProgress());
+        prgTeller.setProgress(neuraalNetwerk.getProgressTeller());
+        prgError.setProgress(neuraalNetwerk.getProgressError());
     }
 
     @Override
     public void update(Observable o, Object arg) {
-       Platform.runLater(new Runnable() {
-           @Override
-           public void run() {
-               vulWaardenin();
-           }
-       });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vulWaardenin();
+            }
+        });
     }
 
 
