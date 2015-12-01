@@ -176,6 +176,7 @@ public class NeuraalNetwerk extends Observable {
             calculateNeurons();
             calculateErrorsAndChangeWeights();
             error = (targets[0] - outputWaarden[0]) + (targets[1] - outputWaarden[1]);
+            error = Math.abs(error);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
