@@ -68,6 +68,7 @@
 
                 <ProgressBar fx:id="prgTeller" layoutX="19.0" layoutY="592.0" prefHeight="20.0" prefWidth="610.0" progress="0.0" />
                 <ProgressBar fx:id="prgError" layoutX="19.0" layoutY="620.0" prefHeight="20.0" prefWidth="610.0" progress="0.0" />
+                <ProgressBar fx:id="prgTarget" layoutX="19.0" layoutY="650.0" prefHeight="20.0" prefWidth="610.0" progress="0.0" />
                 <Label fx:id="lblError" layoutX="318.0" layoutY="515.0" text="Label" />
             </children>
         </AnchorPane>

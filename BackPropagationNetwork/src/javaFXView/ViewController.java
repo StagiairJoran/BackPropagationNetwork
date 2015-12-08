@@ -30,7 +30,6 @@ public class ViewController implements Initializable, Observer {
     public ViewController() {
         neuraalNetwerk = new NeuraalNetwerk();
         neuraalNetwerk.addObserver(this);
-
     }
 
     @FXML
@@ -67,7 +66,7 @@ public class ViewController implements Initializable, Observer {
     private Label target1, target2;
 
     @FXML
-    private ProgressBar prgTeller, prgError;
+    private ProgressBar prgTeller, prgError, prgTarget;
 
     @FXML
     private TextField txtLearningRate, txtErrorThreshold;
@@ -161,6 +160,7 @@ public class ViewController implements Initializable, Observer {
         lblError.setText(String.format("%.7f", neuraalNetwerk.getError()));
         prgTeller.setProgress(neuraalNetwerk.getProgressTeller());
         prgError.setProgress(neuraalNetwerk.getProgressError());
+        prgTarget.setProgress(neuraalNetwerk.getProgressTargets());
     }
 
     @Override
