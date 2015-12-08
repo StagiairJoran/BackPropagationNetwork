@@ -156,9 +156,9 @@ public class ViewController implements Initializable, Observer {
         target1.setText(String.format("%.5f", neuraalNetwerk.getTargets()[0]));
         target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));
 
-        txtErrorThreshold.setText(String.format("%.5f", neuraalNetwerk.getErrorThreshold()));
+        txtErrorThreshold.setText(String.format("%.7f", neuraalNetwerk.getErrorThreshold()));
 
-        lblError.setText(String.format("%.5f", neuraalNetwerk.getError()));
+        lblError.setText(String.format("%.7f", neuraalNetwerk.getError()));
         prgTeller.setProgress(neuraalNetwerk.getProgressTeller());
         prgError.setProgress(neuraalNetwerk.getProgressError());
     }
