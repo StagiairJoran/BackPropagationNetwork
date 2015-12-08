@@ -61,7 +61,7 @@ public class ViewController implements Initializable, Observer {
     private Label lblOutput1, lblOutput2;
 
     @FXML
-    private Label lblError, errorValueOutput1, errorValueOutput2, errorHidden1, errorHidden2;
+    private Label lblError;     // errorValueOutput1, errorValueOutput2, errorHidden1, errorHidden2;
 
     @FXML
     private Label target1, target2;
@@ -84,7 +84,7 @@ public class ViewController implements Initializable, Observer {
                 btnStart.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-        
+
                         Task task = new Task<Void>() {
                             @Override
                             public Void call() throws Exception {
@@ -143,7 +143,7 @@ public class ViewController implements Initializable, Observer {
         lblOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[0]));
         lblOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[1]));
 
-        if (neuraalNetwerk.getOutputErrors() != null) {
+       /* if (neuraalNetwerk.getOutputErrors() != null) {
             errorValueOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[0]));
             errorValueOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[1]));
         }
@@ -151,7 +151,7 @@ public class ViewController implements Initializable, Observer {
         if (neuraalNetwerk.getOutputErrors() != null) {
             errorHidden1.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[0]));
             errorHidden2.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[1]));
-        }
+        }*/
 
         target1.setText(String.format("%.5f", neuraalNetwerk.getTargets()[0]));
         target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));
