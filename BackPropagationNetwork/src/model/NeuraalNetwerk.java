@@ -30,16 +30,22 @@ public class NeuraalNetwerk extends Observable {
     private double[] outputErrors = new double[2];
     private double[] hiddenErrors = new double[4];
 
+    double[][] eersteAxonenPreviousDelta = new double[3][4];
+    double[][] tweedeAxonenPreviousDelta = new double[4][2];
+
+    double[] hiddenPreviousBiasesDelta = new double[4];
+    double[] outputPreviousBiasesDelta = new double[2];
+
     //algoritme implementatie parameters
     private int epoch = 0;
 
-    private int maxEpoch = 1000;
+    private int maxEpoch = 10000;
 
     private double error = 0;
 
-    private double errorThreshold = 0.0001;
+    private double errorThreshold = 0.000001;
 
-    private double momentum;
+    private double momentum = 0.1;
 
     private double learningRate = 0.5;
 
@@ -111,6 +117,25 @@ public class NeuraalNetwerk extends Observable {
         hiddenErrors[2] = 0.00;
         hiddenErrors[3] = 0.00;
 
+        for (int inputTeller = 0; inputTeller < inputWaarden.length; inputTeller++) {
+            for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
+                eersteAxonenPreviousDelta[inputTeller][hiddenTeller] = 0.00;
+            }
+        }
+
+        for (int hiddenTeller = 0; hiddenTeller < hiddenWaarden.length; hiddenTeller++) {
+            for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
+                tweedeAxonenPreviousDelta[hiddenTeller][outputTeller] = 0.00;
+            }
+        }
+
+        for (int i = 0; i < hiddenPreviousBiasesDelta.length; i++) {
+            hiddenPreviousBiasesDelta[i] = 0.00;
+        }
+
+        for (int i = 0; i < outputPreviousBiasesDelta.length; i++) {
+            outputPreviousBiasesDelta[i] = 0.00;
+        }
 
     }
 
@@ -178,11 +203,6 @@ public class NeuraalNetwerk extends Observable {
         return 1.0 / (1.0 + Math.exp(-x));
     }
 
-
-    /* public double sigmoidFunction(double value) {
-         return (1 / (1 + Math.pow(Math.E, (-1 * value))));
-     }
- */
     public static double HyperTanFunction(double x) {
         if (x < -45.0)
             return -1.0;
@@ -197,7 +217,7 @@ public class NeuraalNetwerk extends Observable {
         error = 1;
         while (epoch < maxEpoch && error > errorThreshold) {
             outputWaarden = computeOutputs();
-            calculateErrorsAndChangeWeights();
+            backPropagationFlow();
             error = (targets[0] - outputWaarden[0]) + (targets[1] - outputWaarden[1]);
             error = Math.abs(error);
             try {
@@ -252,30 +272,49 @@ public class NeuraalNetwerk extends Observable {
         return tempOutputWaarden;
     }
 
-    private void calculateErrorsAndChangeWeights() {
-        //calculating outputError
+    private void backPropagationFlow() {
+        //calculating outputErrors
         for (int i = 0; i < outputErrors.length; i++) {
-            outputErrors[i] = outputWaarden[i] * (1 - outputWaarden[i]) * (targets[i] - outputWaarden[i]);
-        }
-
-        //changeWeights
-        for (int hiddenTeller = 0; hiddenTeller < tweedeAxonen.length; hiddenTeller++) {
-            for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
-                tweedeAxonen[hiddenTeller][outputTeller] = tweedeAxonen[hiddenTeller][outputTeller] + learningRate * outputErrors[outputTeller] * tempHiddens[hiddenTeller];
-            }
-
+            outputErrors[i] = ((1 - outputWaarden[i]) * outputWaarden[i]) * (targets[i] - outputWaarden[i]);
         }
 
         //calculating hiddenErrors
         for (int hiddenTeller = 0; hiddenTeller < tempHiddens.length; hiddenTeller++) {
-            hiddenErrors[hiddenTeller] = tempHiddens[hiddenTeller] * (1 - tempHiddens[hiddenTeller]) * ((outputErrors[0] * tweedeAxonen[hiddenTeller][0]) + (outputErrors[1] * tweedeAxonen[hiddenTeller][1]));
+            hiddenErrors[hiddenTeller] = ((1 + tempHiddens[hiddenTeller]) * (1 - tempHiddens[hiddenTeller])) * ((outputErrors[0] * tweedeAxonen[hiddenTeller][0]) + (outputErrors[1] * tweedeAxonen[hiddenTeller][1]));
         }
 
-        //change hidden layer weights
+        //change eerste axonen weights
         for (int hiddenTeller = 0; hiddenTeller < tempHiddens.length; hiddenTeller++) {
             for (int inputTeller = 0; inputTeller < inputWaarden.length; inputTeller++) {
-                eersteAxonen[inputTeller][hiddenTeller] = eersteAxonen[inputTeller][hiddenTeller] + learningRate * hiddenErrors[hiddenTeller] * inputWaarden[inputTeller];
+                eersteAxonen[inputTeller][hiddenTeller] = (eersteAxonen[inputTeller][hiddenTeller] + eersteAxonenPreviousDelta[inputTeller][hiddenTeller]) + (momentum * eersteAxonen[inputTeller][hiddenTeller]);      //stap 2 en 3
+                eersteAxonenPreviousDelta[inputTeller][hiddenTeller] = learningRate * hiddenErrors[hiddenTeller] * inputWaarden[inputTeller];                                                                            //stap 1 en 4
             }
+        }
+
+        //update hidden biasses
+        for (int hiddenTeller = 0; hiddenTeller < tempHiddens.length; hiddenTeller++) {
+            double delta = learningRate * hiddenErrors[hiddenTeller];                                                                  //stap 1
+            hiddenBiasWaarden[hiddenTeller] += delta;                                                                                  //Stap 2
+            hiddenBiasWaarden[hiddenTeller] += momentum * hiddenPreviousBiasesDelta[hiddenTeller];                                     //Stap 3
+            hiddenPreviousBiasesDelta[hiddenTeller] = delta;                                                                           //Stap 4
+        }
+
+        //update hidden layer weights
+        for (int hiddenTeller = 0; hiddenTeller < tweedeAxonen.length; hiddenTeller++) {
+            for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
+                double delta = learningRate * outputErrors[outputTeller] * hiddenWaarden[hiddenTeller];                                 //Stap 1
+                tweedeAxonen[hiddenTeller][outputTeller] += delta;                                                                      //Stap 2
+                tweedeAxonen[hiddenTeller][outputTeller] += momentum * tweedeAxonenPreviousDelta[hiddenTeller][outputTeller];           //Stap 3
+                tweedeAxonenPreviousDelta[hiddenTeller][outputTeller] = delta;                                                          //Stap 4
+            }
+        }
+
+        //update output biasses
+        for (int outputTeller = 0; outputTeller < outputWaarden.length; outputTeller++) {
+            double delta = learningRate * outputErrors[outputTeller];                                                                  //stap 1
+            outputBiasWaarden[outputTeller] += delta;                                                                                  //Stap 2
+            outputBiasWaarden[outputTeller] += momentum * outputPreviousBiasesDelta[outputTeller];                                     //Stap 3
+            outputPreviousBiasesDelta[outputTeller] = delta;                                                                           //Stap 4
         }
     }
 
