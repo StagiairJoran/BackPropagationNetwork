@@ -52,6 +52,7 @@ public class NeuraalNetwerk extends Observable {
 
     private double progressTeller = 0;
     private double progressError = 0;
+    private double progressTargets = 0;
 
     public NeuraalNetwerk() {
 
@@ -137,6 +138,9 @@ public class NeuraalNetwerk extends Observable {
             outputPreviousBiasesDelta[i] = 0.00;
         }
 
+        progressTargets = 0;
+        progressError = 0;
+        progressTeller = 0;
     }
 
     public double[] getInputWaarden() {
@@ -187,6 +191,10 @@ public class NeuraalNetwerk extends Observable {
         return progressError;
     }
 
+    public double getProgressTargets() {
+        return progressTargets;
+    }
+
     public double getError() {
         return error;
     }
@@ -232,6 +240,11 @@ public class NeuraalNetwerk extends Observable {
             epoch++;
             progressTeller = ((double) epoch) / maxEpoch;
             progressError = 1 - (error - 0.0001);
+
+            double iets = 1 - ((outputWaarden[0] - targets[0]) * 1.96); //nooit groter dan 0.51
+            double ander = 1 - ((outputWaarden[1] - targets[1]) * 1.96);
+            double ja = (iets + ander) /2;
+            progressTargets = ja;
         }
 
     }
