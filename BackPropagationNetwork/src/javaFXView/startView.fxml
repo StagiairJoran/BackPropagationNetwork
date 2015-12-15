@@ -10,7 +10,7 @@
 
 <VBox prefHeight="267.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFXView.startController">
     <children>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="505.0" prefWidth="667.0" style="-fx-background-color: blanchedalmond;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="505.0" prefWidth="667.0" styleClass="background" stylesheets="@stylesheet.css"  VBox.vgrow="ALWAYS">
          <children>
             <Button fx:id="simple" layoutX="65.0" layoutY="109.0" mnemonicParsing="false" text="Simple network" />
             <Button fx:id="letter" layoutX="248.0" layoutY="109.0" mnemonicParsing="false" text="Letter network" />
