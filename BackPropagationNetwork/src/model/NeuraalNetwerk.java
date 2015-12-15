@@ -229,6 +229,18 @@ public class NeuraalNetwerk extends Observable {
         return errorThreshold;
     }
 
+    public double getLearningRate() {
+        return learningRate;
+    }
+
+    public void setLearningRate(double learningRate) {
+        this.learningRate = learningRate;
+    }
+
+    public void setErrorThreshold(double errorThreshold) {
+        this.errorThreshold = errorThreshold;
+    }
+
     public static double SigmoidFunction(double x) {
         if (x < -45.0)
             return 0.0;

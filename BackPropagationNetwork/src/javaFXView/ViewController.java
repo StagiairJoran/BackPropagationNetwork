@@ -83,11 +83,14 @@ public class ViewController implements Initializable, Observer {
                 btnStart.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-
+                        /*Todo dit moet nog verandert worden
+                        neuraalNetwerk.setErrorThreshold(Double.parseDouble(txtErrorThreshold.getText()));
+                        neuraalNetwerk.setLearningRate(Double.parseDouble(txtLearningRate.getText()));
+                        */
                         Task task = new Task<Void>() {
                             @Override
                             public Void call() throws Exception {
-                                // updateProgress(1, 100);
+
                                 neuraalNetwerk.startBackPropagation();
                                 return null;
                             }
@@ -100,7 +103,6 @@ public class ViewController implements Initializable, Observer {
                 });
             }
         });
-
 
 
     }
@@ -142,15 +144,7 @@ public class ViewController implements Initializable, Observer {
         lblOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[0]));
         lblOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[1]));
 
-       /* if (neuraalNetwerk.getOutputErrors() != null) {
-            errorValueOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[0]));
-            errorValueOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputErrors()[1]));
-        }
-
-        if (neuraalNetwerk.getOutputErrors() != null) {
-            errorHidden1.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[0]));
-            errorHidden2.setText(String.format("%.3f", neuraalNetwerk.getHiddenErrors()[1]));
-        }*/
+        txtLearningRate.setText("" + neuraalNetwerk.getLearningRate());
 
         target1.setText(String.format("%.5f", neuraalNetwerk.getTargets()[0]));
         target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));

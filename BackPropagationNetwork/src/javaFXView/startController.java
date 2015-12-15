@@ -50,7 +50,7 @@ public class startController implements Initializable {
                 Stage stage = new Stage();
                 Parent root= null;
                 try {
-                    root = FXMLLoader.load(getClass().getResource("view.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("letterView.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
