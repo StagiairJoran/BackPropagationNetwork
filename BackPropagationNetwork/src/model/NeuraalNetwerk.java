@@ -299,8 +299,11 @@ public class NeuraalNetwerk extends Observable {
         //change eerste axonen weights
         for (int hiddenTeller = 0; hiddenTeller < tempHiddens.length; hiddenTeller++) {
             for (int inputTeller = 0; inputTeller < inputWaarden.length; inputTeller++) {
-                eersteAxonen[inputTeller][hiddenTeller] = (eersteAxonen[inputTeller][hiddenTeller] + eersteAxonenPreviousDelta[inputTeller][hiddenTeller]) + (momentum * eersteAxonen[inputTeller][hiddenTeller]);      //stap 2 en 3
-                eersteAxonenPreviousDelta[inputTeller][hiddenTeller] = learningRate * hiddenErrors[hiddenTeller] * inputWaarden[inputTeller];                                                                            //stap 1 en 4
+                double delta = learningRate * hiddenErrors[hiddenTeller] * inputWaarden[inputTeller];                                 //Stap 1
+                eersteAxonen[inputTeller][hiddenTeller] += delta;                                                                      //Stap 2
+                eersteAxonen[inputTeller][hiddenTeller] += momentum * eersteAxonenPreviousDelta[inputTeller][hiddenTeller];           //Stap 3
+                eersteAxonenPreviousDelta[inputTeller][hiddenTeller] = delta;                                                           //Stap 4
+
             }
         }
 
