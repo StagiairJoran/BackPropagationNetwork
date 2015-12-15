@@ -12,9 +12,9 @@ import java.util.Random;
  */
 public class NeuraalNetwerk extends Observable {
 
-    private double[] inputWaarden = new double[3];
+    private double[] inputWaarden;
 
-    private double[][] eersteAxonen = new double[3][4]; // input-to-hidden
+    private double[][] eersteAxonen; // input-to-hidden
 
     private double[] tempHiddens = new double[4];
     private double[] hiddenWaarden = new double[4];
@@ -58,7 +58,28 @@ public class NeuraalNetwerk extends Observable {
 
     }
 
-    public void init() {
+    public void initializeLetterNetwerk() {
+        double[] inputWaardenA = new double[]{0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1};
+
+        inputWaarden = inputWaardenA;
+        eersteAxonen = new double[64][4];
+        eersteAxonenPreviousDelta = new double[64][4];
+
+        double teller = 0.0001;
+        for (int i = 0; i < 64; i++) {
+            for (int j = 0; j < 4; j++) {
+                eersteAxonen[i][j] = teller;
+                teller += 0.0001;
+            }
+        }
+
+        init();
+    }
+
+    public void initializeSimpleNetwerk() {
+        inputWaarden = new double[3];
+        eersteAxonen = new double[3][4];
+
         inputWaarden[0] = 1.0;
         inputWaarden[1] = -2.0;
         inputWaarden[2] = 3.0;
@@ -77,6 +98,11 @@ public class NeuraalNetwerk extends Observable {
         eersteAxonen[2][1] = 0.010;
         eersteAxonen[2][2] = 0.011;
         eersteAxonen[2][3] = 0.012;
+        init();
+    }
+
+    public void init() {
+
 
         hiddenWaarden[0] = 0.0310;
         hiddenWaarden[1] = 0.0340;
@@ -243,7 +269,7 @@ public class NeuraalNetwerk extends Observable {
 
             double iets = 1 - ((outputWaarden[0] - targets[0]) * 1.96); //nooit groter dan 0.51
             double ander = 1 - ((outputWaarden[1] - targets[1]) * 1.96);
-            double ja = (iets + ander) /2;
+            double ja = (iets + ander) / 2;
             progressTargets = ja;
         }
 

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="616.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFXView.LetterViewController">
+    <children>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="681.0" prefWidth="1043.0" styleClass="background" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+            <children>
+                <Button fx:id="btnInitialise" layoutX="229.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Initialise" />
+                <Button fx:id="btnStart" disable="true" layoutX="448.0" layoutY="21.0" mnemonicParsing="false" text="Start Backpropagation" />
+
+                <ProgressBar fx:id="prgTeller" layoutX="20.0" layoutY="598.0" prefHeight="20.0" prefWidth="801.0" progress="0.0" />
+                <ProgressBar fx:id="prgError" layoutX="20.0" layoutY="626.0" prefHeight="20.0" prefWidth="801.0" progress="0.0" />
+                <ProgressBar fx:id="prgTarget" layoutX="20.0" layoutY="650.0" prefHeight="20.0" prefWidth="801.0" progress="0.0" />
+                <Label fx:id="lblError" layoutX="348.0" layoutY="541.0" styleClass="error" text="Error" />
+                <TextField fx:id="txtErrorThreshold" layoutX="525.0" layoutY="503.0" />
+                <Label fx:id="errorThreshold" layoutX="420.0" layoutY="508.0" text="Error Threshold" />
+
+                <TextField id="txtLearningRate" fx:id="txtLearningRate" layoutX="226.0" layoutY="503.0" />
+
+                <Label fx:id="learningRate" layoutX="87.0" layoutY="508.0" text="Learning Rate" />
+                <Pane layoutX="11.0" layoutY="270.0" prefHeight="127.0" prefWidth="210.0">
+                    <children>
+
+                        <Label fx:id="lblHidden1" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 1" />
+                        <Label fx:id="hoWeight11" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH11" />
+                        <Label fx:id="hoWeight12" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH12" />
+                        <Label layoutX="5.0" layoutY="25.0" styleClass="textLabel" text="Hidden" />
+                    </children>
+                </Pane>
+                <Pane layoutX="221.0" layoutY="270.0" prefHeight="127.0" prefWidth="210.0">
+                    <children>
+                        <Label fx:id="lblHidden2" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 2" />
+                        <Label fx:id="hoWeight21" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH21" />
+                        <Label fx:id="hoWeight22" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH22" />
+                    </children>
+                </Pane>
+                <Pane layoutX="431.0" layoutY="270.0" prefHeight="127.0" prefWidth="210.0">
+                    <children>
+                        <Label fx:id="lblHidden3" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 3" />
+                        <Label fx:id="hoWeight31" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH31" />
+                        <Label fx:id="hoWeight32" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH32" />
+                    </children>
+                </Pane>
+                <Pane layoutX="641.0" layoutY="270.0" prefHeight="127.0" prefWidth="210.0">
+                    <children>
+                        <Label fx:id="lblHidden4" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 4" />
+                        <Label fx:id="hoWeight41" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH41" />
+                        <Label fx:id="hoWeight42" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH42" />
+                    </children>
+                </Pane>
+                <Pane layoutX="9.0" layoutY="378.0" prefHeight="127.0" prefWidth="420.0">
+                    <children>
+                        <Label layoutX="5.0" layoutY="27.0" styleClass="textLabel" text="Output" />
+                        <Label fx:id="lblOutput1" layoutX="140.0" layoutY="14.0" styleClass="neuron" text="Output 1" />
+                        <Label fx:id="target1" layoutX="140.0" layoutY="64.0" styleClass="target" text="Label" />
+                    </children>
+                </Pane>
+
+                <Pane layoutX="429.0" layoutY="378.0" prefHeight="127.0" prefWidth="420.0">
+                    <children>
+                        <Label fx:id="lblOutput2" layoutX="140.0" layoutY="14.0" styleClass="neuron" text="Output 2" />
+                        <Label fx:id="target2" layoutX="140.0" layoutY="66.0" styleClass="target" text="Label" />
+                    </children>
+                </Pane>
+                <Pane layoutX="-71.0" layoutY="-42.0" prefHeight="200.0" prefWidth="200.0" />
+                <Pane layoutX="459.0" layoutY="70.0" prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <Label fx:id="lblInput0" layoutX="0.0" layoutY="0.0" text="0" />
+                        <Label fx:id="lblInput1" layoutX="20.0" layoutY="0.0" text="0" />
+                        <Label fx:id="lblInput2" layoutX="40.0" layoutY="0.0" text="0" />
+                        <Label fx:id="lblInput3" layoutX="60.0" layoutY="0.0" text="0" />
+                        <Label fx:id="lblInput4" layoutX="80.0" layoutY="0.0" text="0" />
+                        <Label fx:id="lblInput5" layoutX="100.0" layoutY="0.0" text="0" />
+                        <Label fx:id="lblInput6" layoutX="120.0" layoutY="0.0" text="0" />
+                        <Label fx:id="lblInput7" layoutX="0.0" layoutY="20.0" text="0" />
+                        <Label fx:id="lblInput8" layoutX="20.0" layoutY="20.0" text="0" />
+                        <Label fx:id="lblInput9" layoutX="40.0" layoutY="20.0" text="0" />
+                        <Label fx:id="lblInput10" layoutX="60.0" layoutY="20.0" text="0" />
+                        <Label fx:id="lblInput11" layoutX="80.0" layoutY="20.0" text="0" />
+                        <Label fx:id="lblInput12" layoutX="100.0" layoutY="20.0" text="0" />
+                        <Label fx:id="lblInput13" layoutX="120.0" layoutY="20.0" text="0" />
+                        <Label fx:id="lblInput14" layoutX="0.0" layoutY="40.0" text="0" />
+                        <Label fx:id="lblInput15" layoutX="20.0" layoutY="40.0" text="0" />
+                        <Label fx:id="lblInput16" layoutX="40.0" layoutY="40.0" text="0" />
+                        <Label fx:id="lblInput17" layoutX="60.0" layoutY="40.0" text="0" />
+                        <Label fx:id="lblInput18" layoutX="80.0" layoutY="40.0" text="0" />
+                        <Label fx:id="lblInput19" layoutX="100.0" layoutY="40.0" text="0" />
+                        <Label fx:id="lblInput20" layoutX="120.0" layoutY="40.0" text="0" />
+                        <Label fx:id="lblInput21" layoutX="0.0" layoutY="60.0" text="0" />
+                        <Label fx:id="lblInput22" layoutX="20.0" layoutY="60.0" text="0" />
+                        <Label fx:id="lblInput23" layoutX="40.0" layoutY="60.0" text="0" />
+                        <Label fx:id="lblInput24" layoutX="60.0" layoutY="60.0" text="0" />
+                        <Label fx:id="lblInput25" layoutX="80.0" layoutY="60.0" text="0" />
+                        <Label fx:id="lblInput26" layoutX="100.0" layoutY="60.0" text="0" />
+                        <Label fx:id="lblInput27" layoutX="120.0" layoutY="60.0" text="0" />
+                        <Label fx:id="lblInput28" layoutX="0.0" layoutY="80.0" text="0" />
+                        <Label fx:id="lblInput29" layoutX="20.0" layoutY="80.0" text="0" />
+                        <Label fx:id="lblInput30" layoutX="40.0" layoutY="80.0" text="0" />
+                        <Label fx:id="lblInput31" layoutX="60.0" layoutY="80.0" text="0" />
+                        <Label fx:id="lblInput32" layoutX="80.0" layoutY="80.0" text="0" />
+                        <Label fx:id="lblInput33" layoutX="100.0" layoutY="80.0" text="0" />
+                        <Label fx:id="lblInput34" layoutX="120.0" layoutY="80.0" text="0" />
+                        <Label fx:id="lblInput35" layoutX="0.0" layoutY="100.0" text="0" />
+                        <Label fx:id="lblInput36" layoutX="20.0" layoutY="100.0" text="0" />
+                        <Label fx:id="lblInput37" layoutX="40.0" layoutY="100.0" text="0" />
+                        <Label fx:id="lblInput38" layoutX="60.0" layoutY="100.0" text="0" />
+                        <Label fx:id="lblInput39" layoutX="80.0" layoutY="100.0" text="0" />
+                        <Label fx:id="lblInput40" layoutX="100.0" layoutY="100.0" text="0" />
+                        <Label fx:id="lblInput41" layoutX="120.0" layoutY="100.0" text="0" />
+                        <Label fx:id="lblInput42" layoutX="0.0" layoutY="120.0" text="0" />
+                        <Label fx:id="lblInput43" layoutX="20.0" layoutY="120.0" text="0" />
+                        <Label fx:id="lblInput44" layoutX="40.0" layoutY="120.0" text="0" />
+                        <Label fx:id="lblInput45" layoutX="60.0" layoutY="120.0" text="0" />
+                        <Label fx:id="lblInput46" layoutX="80.0" layoutY="120.0" text="0" />
+                        <Label fx:id="lblInput47" layoutX="100.0" layoutY="120.0" text="0" />
+                        <Label fx:id="lblInput48" layoutX="120.0" layoutY="120.0" text="0" />
+                        <Label fx:id="lblInput49" layoutX="0.0" layoutY="140.0" text="0" />
+                        <Label fx:id="lblInput50" layoutX="20.0" layoutY="140.0" text="0" />
+                        <Label fx:id="lblInput51" layoutX="40.0" layoutY="140.0" text="0" />
+                        <Label fx:id="lblInput52" layoutX="60.0" layoutY="140.0" text="0" />
+                        <Label fx:id="lblInput53" layoutX="80.0" layoutY="140.0" text="0" />
+                        <Label fx:id="lblInput54" layoutX="100.0" layoutY="140.0" text="0" />
+                        <Label fx:id="lblInput55" layoutX="120.0" layoutY="140.0" text="0" />
+                        <Label fx:id="lblInput56" layoutX="0.0" layoutY="160.0" text="0" />
+                        <Label fx:id="lblInput57" layoutX="20.0" layoutY="160.0" text="0" />
+                        <Label fx:id="lblInput58" layoutX="40.0" layoutY="160.0" text="0" />
+                        <Label fx:id="lblInput59" layoutX="60.0" layoutY="160.0" text="0" />
+                        <Label fx:id="lblInput60" layoutX="80.0" layoutY="160.0" text="0" />
+                        <Label fx:id="lblInput61" layoutX="100.0" layoutY="160.0" text="0" />
+                        <Label fx:id="lblInput62" layoutX="120.0" layoutY="160.0" text="0" />
+
+                    </children>
+                </Pane>
+            <Label layoutX="217.0" layoutY="93.0" text="A = ">
+               <font>
+                  <Font size="96.0" />
+               </font>
+            </Label>
+
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
