@@ -15,9 +15,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("letterView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("startView.fxml"));
         primaryStage.setTitle("Backpropagation");
-        primaryStage.setScene(new Scene(root, 850, 610));
+        primaryStage.setScene(new Scene(root, 420, 270));
         primaryStage.show();
 
     }
