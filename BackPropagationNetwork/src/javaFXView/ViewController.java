@@ -76,7 +76,7 @@ public class ViewController implements Initializable, Observer {
         btnInitialise.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                neuraalNetwerk.init();
+                neuraalNetwerk.initializeSimpleNetwerk();
                 vulWaardenin();
                 initialized = true;
                 btnStart.setDisable(false);
