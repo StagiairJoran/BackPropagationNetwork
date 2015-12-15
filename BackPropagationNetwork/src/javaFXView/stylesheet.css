@@ -1,7 +1,7 @@
 .neuron {
-    -fx-background-color: #11b259;
+    -fx-background-color: #3F597F;
     -fx-background-radius: 20;
-    -fx-text-fill: #caffe2;
+    -fx-text-fill: #CBDFFF;
     -fx-font-style: oblique;
     -fx-padding: 1em;
     -fx-border-radius: 20;
@@ -9,22 +9,22 @@
 }
 
 .axon {
-    -fx-background-color: #32ff8d;
+    -fx-background-color: #7EB1FF;
     -fx-background-radius: 5;
     -fx-padding: 0.5em;
-    -fx-text-fill: #11b259;
+    -fx-text-fill: #3F597F;
 }
 
 .background {
-    -fx-background-color: #caffe2;
+    -fx-background-color: #CBDFFF;
 
 }
 
 .target {
-    -fx-background-color: #11b259;
+    -fx-background-color: #658ECC;
     -fx-background-radius: 20;
     -fx-padding: 1em;
-    -fx-text-fill: #32ff8d;
+    -fx-text-fill: #CBDFFF;
     -fx-min-width: 7em;
 
 
@@ -34,9 +34,9 @@
     -fx-background-color: #b20f00;
     -fx-background-radius: 20;
     -fx-padding: 1em;
-    -fx-text-fill: #caffe2;
+    -fx-text-fill: #CBDFFF;
 }
 
 .textLabel {
-    -fx-text-fill: #11b259;
+    -fx-text-fill: #3F597F;
 }
