@@ -44,9 +44,7 @@ public class NeuraalNetwerk extends Observable {
     private double error = 0;
 
     private double errorThreshold = 0.000001;
-
     private double momentum = 0.1;
-
     private double learningRate = 0.5;
 
 

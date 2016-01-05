@@ -81,7 +81,7 @@ public class ViewController implements Initializable, Observer {
                     public void handle(ActionEvent event) {
                         //Todo dit moet nog verandert worden
                         String errorThresholdString = txtErrorThreshold.getText().replace(',', '.');
-                        neuraalNetwerk.setErrorThreshold(Double.parseDouble( errorThresholdString));
+                        neuraalNetwerk.setErrorThreshold(Double.parseDouble(errorThresholdString));
                         String learningRateString = txtLearningRate.getText().replace(',', '.');
                         neuraalNetwerk.setLearningRate(Double.parseDouble(learningRateString));
 
@@ -142,7 +142,7 @@ public class ViewController implements Initializable, Observer {
         lblOutput1.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[0]));
         lblOutput2.setText(String.format("%.3f", neuraalNetwerk.getOutputWaarden()[1]));
 
-        txtLearningRate.setText("" + neuraalNetwerk.getLearningRate());
+        txtLearningRate.setText(String.format("%.1f", neuraalNetwerk.getLearningRate()));
 
         target1.setText(String.format("%.5f", neuraalNetwerk.getTargets()[0]));
         target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));
