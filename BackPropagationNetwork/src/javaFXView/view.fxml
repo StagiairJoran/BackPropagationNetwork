@@ -15,9 +15,6 @@
                 <Button fx:id="btnInitialise" layoutX="229.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Initialise" />
                 <Button fx:id="btnStart" disable="true" layoutX="448.0" layoutY="21.0" mnemonicParsing="false" text="Start Backpropagation" />
 
-                <ProgressBar fx:id="prgTeller" layoutX="29.0" layoutY="508.0" prefHeight="20.0" prefWidth="801.0" progress="0.0" />
-                <ProgressBar fx:id="prgError" layoutX="29.0" layoutY="536.0" prefHeight="20.0" prefWidth="801.0" progress="0.0" />
-                <ProgressBar fx:id="prgTarget" layoutX="29.0" layoutY="560.0" prefHeight="20.0" prefWidth="801.0" progress="0.0" />
                 <Label fx:id="lblError" layoutX="339.0" layoutY="454.0" styleClass="error" text="Error" />
                 <TextField fx:id="txtErrorThreshold" layoutX="516.0" layoutY="416.0" />
                 <Label fx:id="errorThreshold" layoutX="411.0" layoutY="421.0" text="Error Threshold" />

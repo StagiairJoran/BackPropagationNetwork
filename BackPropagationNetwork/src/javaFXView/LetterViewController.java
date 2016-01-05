@@ -54,15 +54,6 @@ public class LetterViewController implements Initializable, Observer {
     @FXML
     private Label lblInput60, lblInput61, lblInput62;
 
-    /* @FXML
-     private Label ihWeight11, ihWeight12, ihWeight13, ihWeight14;
-
-     @FXML
-     private Label ihWeight21, ihWeight22, ihWeight23, ihWeight24;
-
-     @FXML
-     private Label ihWeight31, ihWeight32, ihWeight33, ihWeight34;
- */
     @FXML
     private Label lblHidden1, lblHidden2, lblHidden3, lblHidden4;
 
@@ -121,25 +112,6 @@ public class LetterViewController implements Initializable, Observer {
     }
 
     private void vulWaardenin() {
-     /*   lblInput1.setText(String.format("%.1f", neuraalNetwerk.getInputWaarden()[0]));
-        lblInput2.setText(String.format("%.1f", neuraalNetwerk.getInputWaarden()[1]));
-        lblInput3.setText(String.format("%.1f", neuraalNetwerk.getInputWaarden()[2]));
-
-        ihWeight11.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[0][0]));
-        ihWeight12.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[0][1]));
-        ihWeight13.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[0][2]));
-        ihWeight14.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[0][3]));
-
-        ihWeight21.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[1][0]));
-        ihWeight22.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[1][1]));
-        ihWeight23.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[1][2]));
-        ihWeight24.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[1][3]));
-
-        ihWeight31.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[2][0]));
-        ihWeight32.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[2][1]));
-        ihWeight33.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[2][2]));
-        ihWeight34.setText(String.format("%.3f", neuraalNetwerk.getEersteAxonen()[2][3]));*/
-
         lblInput0.setText(String.format("%.0f", neuraalNetwerk.getInputWaarden()[0]));
         lblInput1.setText(String.format("%.0f", neuraalNetwerk.getInputWaarden()[1]));
         lblInput2.setText(String.format("%.0f", neuraalNetwerk.getInputWaarden()[2]));
@@ -229,9 +201,6 @@ public class LetterViewController implements Initializable, Observer {
         txtErrorThreshold.setText(String.format("%.7f", neuraalNetwerk.getErrorThreshold()));
 
         lblError.setText(String.format("%.7f", neuraalNetwerk.getError()));
-        prgTeller.setProgress(neuraalNetwerk.getProgressTeller());
-        prgError.setProgress(neuraalNetwerk.getProgressError());
-        prgTarget.setProgress(neuraalNetwerk.getProgressTargets());
     }
 
     @Override

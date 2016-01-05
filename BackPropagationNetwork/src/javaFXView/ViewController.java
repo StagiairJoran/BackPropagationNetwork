@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import model.NeuraalNetwerk;
 
@@ -66,9 +65,6 @@ public class ViewController implements Initializable, Observer {
     private Label target1, target2;
 
     @FXML
-    private ProgressBar prgTeller, prgError, prgTarget;
-
-    @FXML
     private TextField txtLearningRate, txtErrorThreshold;
 
     @Override
@@ -83,10 +79,12 @@ public class ViewController implements Initializable, Observer {
                 btnStart.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        /*Todo dit moet nog verandert worden
-                        neuraalNetwerk.setErrorThreshold(Double.parseDouble(txtErrorThreshold.getText()));
-                        neuraalNetwerk.setLearningRate(Double.parseDouble(txtLearningRate.getText()));
-                        */
+                        //Todo dit moet nog verandert worden
+                        String errorThresholdString = txtErrorThreshold.getText().replace(',', '.');
+                        neuraalNetwerk.setErrorThreshold(Double.parseDouble( errorThresholdString));
+                        String learningRateString = txtLearningRate.getText().replace(',', '.');
+                        neuraalNetwerk.setLearningRate(Double.parseDouble(learningRateString));
+
                         Task task = new Task<Void>() {
                             @Override
                             public Void call() throws Exception {
@@ -152,9 +150,6 @@ public class ViewController implements Initializable, Observer {
         txtErrorThreshold.setText(String.format("%.7f", neuraalNetwerk.getErrorThreshold()));
 
         lblError.setText(String.format("%.7f", neuraalNetwerk.getError()));
-        prgTeller.setProgress(neuraalNetwerk.getProgressTeller());
-        prgError.setProgress(neuraalNetwerk.getProgressError());
-        prgTarget.setProgress(neuraalNetwerk.getProgressTargets());
     }
 
     @Override
