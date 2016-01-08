@@ -61,6 +61,9 @@ public class ViewController implements Initializable, Observer {
     @FXML
     private Label lblError;     // errorValueOutput1, errorValueOutput2, errorHidden1, errorHidden2;
 
+  /*  @FXML
+    private TextField lblErrorThreshold;
+*/
     @FXML
     private Label target1, target2;
 
@@ -148,12 +151,17 @@ public class ViewController implements Initializable, Observer {
         target2.setText(String.format("%.5f", neuraalNetwerk.getTargets()[1]));
 
         txtErrorThreshold.setText(String.format("%.7f", neuraalNetwerk.getErrorThreshold()));
+/*
+        lblErrorThreshold.setText(String.format("%.7f", neuraalNetwerk.getErrorThreshold()));
+*/
 
         lblError.setText(String.format("%.7f", neuraalNetwerk.getError()));
     }
 
     @Override
     public void update(Observable o, Object arg) {
+        String errorThresholdString = txtErrorThreshold.getText().replace(',', '.');
+        neuraalNetwerk.setErrorThreshold(Double.parseDouble(errorThresholdString));
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

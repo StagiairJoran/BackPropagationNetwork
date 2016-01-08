@@ -37,6 +37,8 @@ public class startController implements Initializable {
                 }
 
                 Scene scene = new Scene(root);
+                stage.setTitle("Simple Backpropagation");
+                stage.setResizable(false);
                 stage.setScene(scene);
                 stage.show();
 
@@ -57,6 +59,9 @@ public class startController implements Initializable {
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
+                stage.setResizable(false);
+
+                stage.setTitle("Letter Backpropagation");
                 stage.show();
             }
         });

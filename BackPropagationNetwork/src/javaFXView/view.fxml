@@ -8,94 +8,100 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="616.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFXView.ViewController">
+<VBox prefHeight="512.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFXView.ViewController">
     <children>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="616.0" prefWidth="840.0" styleClass="background" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="616.0" prefWidth="870.0" styleClass="background" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
             <children>
-                <Button fx:id="btnInitialise" layoutX="229.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Initialise" />
-                <Button fx:id="btnStart" disable="true" layoutX="448.0" layoutY="21.0" mnemonicParsing="false" text="Start Backpropagation" />
 
-                <Label fx:id="lblError" layoutX="339.0" layoutY="454.0" styleClass="error" text="Error" />
-                <TextField fx:id="txtErrorThreshold" layoutX="516.0" layoutY="416.0" />
-                <Label fx:id="errorThreshold" layoutX="411.0" layoutY="421.0" text="Error Threshold" />
+                <Label fx:id="lblError" layoutX="358.0" layoutY="443.0" styleClass="error" text="Error" />
 
-                <TextField id="txtLearningRate" fx:id="txtLearningRate" layoutX="217.0" layoutY="416.0" />
-
-                <Label fx:id="learningRate" layoutX="78.0" layoutY="421.0" text="Learning Rate" />
-                <Pane layoutX="2.0" layoutY="183.0" prefHeight="127.0" prefWidth="210.0">
+                <TextField id="txtLearningRate" fx:id="txtLearningRate" layoutX="764.0" layoutY="444.0" prefHeight="27.0" prefWidth="85.0" styleClass="errorThreshold" text="0,5" />
+                <Pane layoutX="73.0" layoutY="186.0" prefHeight="127.0" prefWidth="210.0">
                     <children>
 
                         <Label fx:id="lblHidden1" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 1" />
                         <Label fx:id="hoWeight11" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH11" />
                         <Label fx:id="hoWeight12" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH12" />
-                  <Label layoutX="5.0" layoutY="25.0" text="Hidden" styleClass="textLabel" />
                     </children>
                 </Pane>
-                <Pane layoutX="212.0" layoutY="183.0" prefHeight="127.0" prefWidth="210.0">
+                <Pane layoutX="283.0" layoutY="186.0" prefHeight="127.0" prefWidth="210.0">
                     <children>
                         <Label fx:id="lblHidden2" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 2" />
                         <Label fx:id="hoWeight21" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH21" />
                         <Label fx:id="hoWeight22" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH22" />
                     </children>
                 </Pane>
-                <Pane layoutX="422.0" layoutY="183.0" prefHeight="127.0" prefWidth="210.0">
+                <Pane layoutX="493.0" layoutY="186.0" prefHeight="127.0" prefWidth="210.0">
                     <children>
                         <Label fx:id="lblHidden3" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 3" />
                         <Label fx:id="hoWeight31" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH31" />
                         <Label fx:id="hoWeight32" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH32" />
                     </children>
                 </Pane>
-                <Pane layoutX="632.0" layoutY="183.0" prefHeight="127.0" prefWidth="210.0">
+                <Pane layoutX="703.0" layoutY="186.0" prefHeight="127.0" prefWidth="210.0">
                     <children>
                         <Label fx:id="lblHidden4" layoutX="64.0" layoutY="14.0" styleClass="neuron" text="Hidden 4" />
                         <Label fx:id="hoWeight41" layoutX="51.0" layoutY="72.0" styleClass="axon" text="IH41" />
                         <Label fx:id="hoWeight42" layoutX="119.0" layoutY="72.0" styleClass="axon" text="IH42" />
                     </children>
                 </Pane>
-                <Pane layoutX="0.0" layoutY="77.0" prefHeight="106.0" prefWidth="283.0">
+                <Pane layoutX="69.0" layoutY="28.0" prefHeight="158.0" prefWidth="283.0">
                     <children>
 
-                        <Label fx:id="lblInput1" layoutX="107.0" layoutY="14.0" styleClass="neuron" text="Input 1" />
+                        <Label fx:id="lblInput1" layoutX="105.0" layoutY="23.0" styleClass="neuron" text="Input 1" />
 
-                        <Label fx:id="ihWeight11" layoutX="9.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH11" />
-                        <Label fx:id="ihWeight12" layoutX="75.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH12" />
-                        <Label fx:id="ihWeight14" layoutX="214.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH14" />
-                        <Label fx:id="ihWeight13" layoutX="147.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH13" />
-                  <Label layoutX="5.0" layoutY="27.0" text="Input" styleClass="textLabel"/>
+                        <Label fx:id="ihWeight11" layoutX="9.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH11" />
+                        <Label fx:id="ihWeight12" layoutX="75.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH12" />
+                        <Label fx:id="ihWeight14" layoutX="209.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH14" />
+                        <Label fx:id="ihWeight13" layoutX="142.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH13" />
+                  <Label layoutX="9.0" layoutY="87.0" styleClass="textLabel" text="Neuraal Netwerk" />
                     </children>
                 </Pane>
-                <Pane layoutX="280.0" layoutY="77.0" prefHeight="106.0" prefWidth="283.0">
+                <Pane layoutX="349.0" layoutY="28.0" prefHeight="158.0" prefWidth="283.0">
                     <children>
-                        <Label fx:id="lblInput2" layoutX="107.0" layoutY="14.0" styleClass="neuron" text="Input 2" />
-                        <Label fx:id="ihWeight22" layoutX="9.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH22" />
-                        <Label fx:id="ihWeight24" layoutX="75.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH24" textAlignment="CENTER" />
-                        <Label fx:id="ihWeight23" layoutX="214.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH23" textAlignment="CENTER" />
-                        <Label fx:id="ihWeight21" layoutX="147.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH21" />
+                        <Label fx:id="lblInput2" layoutX="105.0" layoutY="24.0" styleClass="neuron" text="Input 2" />
+                        <Label fx:id="ihWeight22" layoutX="14.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH22" />
+                        <Label fx:id="ihWeight24" layoutX="82.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH24" textAlignment="CENTER" />
+                        <Label fx:id="ihWeight23" layoutX="214.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH23" textAlignment="CENTER" />
+                        <Label fx:id="ihWeight21" layoutX="147.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH21" />
                     </children>
                 </Pane>
-                <Pane layoutX="560.0" layoutY="77.0" prefHeight="106.0" prefWidth="283.0">
+                <Pane layoutX="629.0" layoutY="28.0" prefHeight="158.0" prefWidth="283.0">
                     <children>
-                        <Label fx:id="lblInput3" layoutX="107.0" layoutY="14.0" styleClass="neuron" text="Input 3" />
-                        <Label fx:id="ihWeight32" layoutX="9.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH32" />
-                        <Label fx:id="ihWeight34" layoutX="75.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH34" />
-                        <Label fx:id="ihWeight33" layoutX="214.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH33" />
-                        <Label fx:id="ihWeight31" layoutX="147.0" layoutY="64.0" prefWidth="60.0" styleClass="axon" text="IH31" />
+                        <Label fx:id="lblInput3" layoutX="102.0" layoutY="22.0" styleClass="neuron" text="Input 3" />
+                        <Label fx:id="ihWeight32" layoutX="14.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH32" />
+                        <Label fx:id="ihWeight34" layoutX="82.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH34" />
+                        <Label fx:id="ihWeight33" layoutX="214.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH33" />
+                        <Label fx:id="ihWeight31" layoutX="147.0" layoutY="113.0" prefWidth="60.0" styleClass="axon" text="IH31" />
                     </children>
                 </Pane>
-            <Pane layoutX="0.0" layoutY="291.0" prefHeight="127.0" prefWidth="420.0">
+            <Pane layoutX="56.0" layoutY="313.0" prefHeight="127.0" prefWidth="420.0">
                <children>
-                  <Label layoutX="5.0" layoutY="27.0" text="Output" styleClass="textLabel" />
                       <Label fx:id="lblOutput1" layoutX="140.0" layoutY="14.0" styleClass="neuron" text="Output 1" />
                       <Label fx:id="target1" layoutX="140.0" layoutY="64.0" styleClass="target" text="Label" />
                </children>
             </Pane>
 
-            <Pane layoutX="420.0" layoutY="291.0" prefHeight="127.0" prefWidth="420.0">
+            <Pane layoutX="476.0" layoutY="313.0" prefHeight="127.0" prefWidth="420.0">
                <children>
                       <Label fx:id="lblOutput2" layoutX="140.0" layoutY="14.0" styleClass="neuron" text="Output 2" />
                       <Label fx:id="target2" layoutX="140.0" layoutY="66.0" styleClass="target" text="Label" />
                </children>
             </Pane>
+            <Label layoutX="17.0" layoutY="457.0" styleClass="textLabel" text="Error:" />
+            <Pane layoutX="71.0" layoutY="133.0" prefHeight="167.0" prefWidth="843.0" style="-fx-border-color: black; -fx-border-style: dotted;" />
+            <Label layoutX="12.0" layoutY="206.0" styleClass="textLabel" text="Hidden" />
+            <Label layoutX="12.0" layoutY="343.0" styleClass="textLabel" text="Outputs:" />
+            <Label layoutX="13.0" layoutY="386.0" styleClass="textLabel" text="Targets:" />
+            <Label layoutX="12.0" layoutY="223.0" styleClass="textLabel" text="Values:" />
+            <Label layoutX="13.0" layoutY="71.0" styleClass="textLabel" text="Inputs:" />
+            <Label layoutX="919.0" layoutY="206.0" styleClass="textLabel" text="Axonen" />
+            <Label layoutX="919.0" layoutY="334.0" styleClass="textLabel" text="Axonen" />
+                <Button fx:id="btnInitialise" layoutX="852.0" layoutY="52.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="116.0" styleClass="userBtn" text="Initialise" />
+                <Button fx:id="btnStart" disable="true" layoutX="855.0" layoutY="446.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="116.0" styleClass="userBtn" text="Start" />
+            <TextField fx:id="txtErrorThreshold" layoutX="537.0" layoutY="443.0" prefHeight="43.0" prefWidth="96.0" styleClass="errorThreshold" text=" 0,000001" />
+            <Label layoutX="461.0" layoutY="457.0" styleClass="textLabel" text="Threshold:" />
+            <Label layoutX="660.0" layoutY="458.0" styleClass="textLabel" text="Learning rate:" />
             </children>
         </AnchorPane>
     </children>

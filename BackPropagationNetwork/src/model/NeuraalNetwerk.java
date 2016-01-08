@@ -96,6 +96,7 @@ public class NeuraalNetwerk extends Observable {
         eersteAxonen[2][1] = 0.010;
         eersteAxonen[2][2] = 0.011;
         eersteAxonen[2][3] = 0.012;
+        error = 1;
         init();
     }
 
@@ -265,7 +266,7 @@ public class NeuraalNetwerk extends Observable {
             error = (targets[0] - outputWaarden[0]) + (targets[1] - outputWaarden[1]);
             error = Math.abs(error);
             try {
-                Thread.sleep(10);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

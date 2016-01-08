@@ -36,7 +36,24 @@
     -fx-padding: 1em;
     -fx-text-fill: #CBDFFF;
 }
+.errorThreshold {
+    -fx-background-color: whitesmoke;
+    -fx-background-radius: 20;
+    -fx-padding: 1em;
+    -fx-text-fill: #3F597F;
+}
+
 
 .textLabel {
     -fx-text-fill: #3F597F;
+}
+
+.userBtn {
+
+  /*  -fx-background-radius: 30px;*/
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20 10 20;
 }
