@@ -141,7 +141,7 @@
             <Label layoutX="10.0" layoutY="276.0" styleClass="textLabel" text="Values:" />
                   <Label layoutX="13.0" layoutY="403.0" styleClass="textLabel" text="Outputs:" />
             <Label layoutX="14.0" layoutY="458.0" styleClass="textLabel" text="Targets:" />
-            <Pane layoutX="84.0" layoutY="245.0" prefHeight="118.0" prefWidth="766.0" style="-fx-border-color: black; -fx-border-style: dotted;" />
+            <Pane layoutX="84.0" layoutY="245.0" prefHeight="118.0" prefWidth="771.0" style="-fx-border-color: black; -fx-border-style: dotted;" />
             <Label layoutX="101.0" layoutY="228.0" styleClass="textLabel" text="Neuraal Netwerk" />
 
             </children>
