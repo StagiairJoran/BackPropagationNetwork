@@ -95,8 +95,8 @@
             <Label layoutX="13.0" layoutY="386.0" styleClass="textLabel" text="Targets:" />
             <Label layoutX="12.0" layoutY="223.0" styleClass="textLabel" text="Values:" />
             <Label layoutX="13.0" layoutY="71.0" styleClass="textLabel" text="Inputs:" />
-            <Label layoutX="919.0" layoutY="206.0" styleClass="textLabel" text="Axonen" />
-            <Label layoutX="919.0" layoutY="334.0" styleClass="textLabel" text="Axonen" />
+            <Label layoutX="919.0" layoutY="147.0" styleClass="textLabel" text="Axonen" />
+            <Label layoutX="919.0" layoutY="266.0" styleClass="textLabel" text="Axonen" />
                 <Button fx:id="btnInitialise" layoutX="852.0" layoutY="52.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="116.0" styleClass="userBtn" text="Initialise" />
                 <Button fx:id="btnStart" disable="true" layoutX="855.0" layoutY="446.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="116.0" styleClass="userBtn" text="Start" />
             <TextField fx:id="txtErrorThreshold" layoutX="537.0" layoutY="443.0" prefHeight="43.0" prefWidth="96.0" styleClass="errorThreshold" text=" 0,000001" />

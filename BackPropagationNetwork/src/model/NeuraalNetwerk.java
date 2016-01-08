@@ -240,6 +240,14 @@ public class NeuraalNetwerk extends Observable {
         this.errorThreshold = errorThreshold;
     }
 
+    public int getEpoch() {
+        return epoch;
+    }
+
+    public int getMaxEpoch() {
+        return maxEpoch;
+    }
+
     public static double SigmoidFunction(double x) {
         if (x < -45.0)
             return 0.0;

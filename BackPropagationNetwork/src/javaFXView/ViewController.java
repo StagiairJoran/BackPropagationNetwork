@@ -88,6 +88,9 @@ public class ViewController implements Initializable, Observer {
                         String learningRateString = txtLearningRate.getText().replace(',', '.');
                         neuraalNetwerk.setLearningRate(Double.parseDouble(learningRateString));
 
+                        btnInitialise.setDisable(true);
+                        btnStart.setDisable(true);
+
                         Task task = new Task<Void>() {
                             @Override
                             public Void call() throws Exception {
@@ -156,12 +159,16 @@ public class ViewController implements Initializable, Observer {
 */
 
         lblError.setText(String.format("%.7f", neuraalNetwerk.getError()));
+
+        if(neuraalNetwerk.getError() < neuraalNetwerk.getErrorThreshold() || neuraalNetwerk.getEpoch() >= neuraalNetwerk.getMaxEpoch() ){
+            btnInitialise.setDisable(false);
+        }
+
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        String errorThresholdString = txtErrorThreshold.getText().replace(',', '.');
-        neuraalNetwerk.setErrorThreshold(Double.parseDouble(errorThresholdString));
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
