@@ -12,8 +12,8 @@
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="859.0" prefWidth="953.0" styleClass="background" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
             <children>
-                <Button fx:id="btnInitialise" layoutX="795.0" layoutY="101.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" styleClass="userBtn" text="Initialise" />
-                <Button fx:id="btnStart" disable="true" layoutX="795.0" layoutY="506.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="134.0" styleClass="userBtn" text="Start" />
+                <Button fx:id="btnInitialise" layoutX="795.0" layoutY="101.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" styleClass="userBtn" text="Initialise" />
+                <Button fx:id="btnStart" disable="true" layoutX="795.0" layoutY="503.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" styleClass="userBtn" text="Start" />
 
                 <Label fx:id="lblError" alignment="CENTER" layoutX="273.0" layoutY="503.0" styleClass="error" text="Error" />
                 <TextField fx:id="txtErrorThreshold" layoutX="452.0" layoutY="503.0" prefHeight="43.0" prefWidth="103.0" styleClass="errorThreshold" text="0,000001" />

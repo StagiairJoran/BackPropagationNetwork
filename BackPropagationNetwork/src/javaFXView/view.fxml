@@ -13,9 +13,9 @@
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="616.0" prefWidth="870.0" styleClass="background" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
             <children>
 
-                <Label fx:id="lblError" layoutX="358.0" layoutY="443.0" styleClass="error" text="Error" />
+                <Label fx:id="lblError" layoutX="331.0" layoutY="444.0" styleClass="error" text="Error" />
 
-                <TextField id="txtLearningRate" fx:id="txtLearningRate" layoutX="764.0" layoutY="444.0" prefHeight="27.0" prefWidth="85.0" styleClass="errorThreshold" text="0,5" />
+                <TextField id="txtLearningRate" fx:id="txtLearningRate" layoutX="741.0" layoutY="445.0" prefHeight="43.0" prefWidth="91.0" styleClass="errorThreshold" text="0,5" />
                 <Pane layoutX="73.0" layoutY="186.0" prefHeight="127.0" prefWidth="210.0">
                     <children>
 
@@ -88,7 +88,7 @@
                       <Label fx:id="target2" layoutX="140.0" layoutY="66.0" styleClass="target" text="Label" />
                </children>
             </Pane>
-            <Label layoutX="17.0" layoutY="457.0" styleClass="textLabel" text="Error:" />
+            <Label layoutX="283.0" layoutY="458.0" styleClass="textLabel" text="Error:" />
             <Pane layoutX="71.0" layoutY="133.0" prefHeight="167.0" prefWidth="843.0" style="-fx-border-color: black; -fx-border-style: dotted;" />
             <Label layoutX="12.0" layoutY="206.0" styleClass="textLabel" text="Hidden" />
             <Label layoutX="12.0" layoutY="343.0" styleClass="textLabel" text="Outputs:" />
@@ -97,11 +97,11 @@
             <Label layoutX="13.0" layoutY="71.0" styleClass="textLabel" text="Inputs:" />
             <Label layoutX="919.0" layoutY="147.0" styleClass="textLabel" text="Axonen" />
             <Label layoutX="919.0" layoutY="266.0" styleClass="textLabel" text="Axonen" />
-                <Button fx:id="btnInitialise" layoutX="852.0" layoutY="52.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="116.0" styleClass="userBtn" text="Initialise" />
-                <Button fx:id="btnStart" disable="true" layoutX="855.0" layoutY="446.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="116.0" styleClass="userBtn" text="Start" />
-            <TextField fx:id="txtErrorThreshold" layoutX="537.0" layoutY="443.0" prefHeight="43.0" prefWidth="96.0" styleClass="errorThreshold" text=" 0,000001" />
-            <Label layoutX="461.0" layoutY="457.0" styleClass="textLabel" text="Threshold:" />
-            <Label layoutX="660.0" layoutY="458.0" styleClass="textLabel" text="Learning rate:" />
+                <Button fx:id="btnStart" disable="true" layoutX="849.0" layoutY="444.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="116.0" styleClass="userBtn" text="Start" />
+            <TextField fx:id="txtErrorThreshold" layoutX="516.0" layoutY="445.0" prefHeight="43.0" prefWidth="96.0" styleClass="errorThreshold" text=" 0,000001" />
+            <Label layoutX="444.0" layoutY="458.0" styleClass="textLabel" text="Threshold:" />
+            <Label layoutX="643.0" layoutY="459.0" styleClass="textLabel" text="Learning rate:" />
+                <Button fx:id="btnInitialise" layoutX="849.0" layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="116.0" styleClass="userBtn" text="Initialise" />
             </children>
         </AnchorPane>
     </children>
